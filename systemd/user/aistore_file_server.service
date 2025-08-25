@@ -1,0 +1,13 @@
+[Unit]
+Description=AI store static file server
+After=network.target
+
+[Service]
+WorkingDirectory=/home/reinir/repos/static_file_server
+ExecStart=/home/reinir/repos/static_file_server/image_server
+Restart=always
+RestartSec=5
+SyslogIdentifier=aistore_image_server
+
+[Install]
+WantedBy=default.target

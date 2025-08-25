@@ -1,0 +1,12 @@
+﻿[Unit]
+Description=AIScannerStore API service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/dotnet /home/reinir/repos/AIScannerStore_BE/publish/AIScannersStore_Socket.dll
+Restart=on-failure
+WorkingDirectory=/home/reinir/repos/AIScannerStore_BE/publish
+
+[Install]
+WantedBy=default.target
