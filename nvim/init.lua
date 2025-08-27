@@ -47,6 +47,11 @@ require("lazy").setup({
         dependencies = { "echasnovski/mini.icons", opts = {}},
         lazy = false -- lazy load not recommended
     },
+    { "tpope/vim-dadbod",
+        dependencies = {
+            "kristijanhusak/vim-dadbod-completion"
+        }
+    },
 })
 
 require("dapui").setup()
@@ -76,6 +81,7 @@ require("rei.session")
 require("rei.buffer")
 require("rei.editor")
 require("rei.debugger")
+require("rei.database")
 
 -- debugger
 local keymap = vim.keymap.set
