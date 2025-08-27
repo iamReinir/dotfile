@@ -1,0 +1,2 @@
+# cat make it take data from stdin
+cat | sqlite3 -header -csv ~/common.sqlite 

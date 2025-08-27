@@ -1,3 +1,5 @@
+local opts = { noremap = true, silent = true }
+local map = vim.keymap.set
 -- Tabbar
 require('barbar').setup {
     icons = {
@@ -16,6 +18,9 @@ require('oil').setup {
     columns = {
     }
 }
+map('n', '<leader>cd', function()
+    vim.cmd("cd " .. require('oil').get_current_dir())
+end, opts)
 
 vim.api.nvim_create_user_command("Ex", function()
     require('oil').open(path)
@@ -78,9 +83,6 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.signcolumn = "yes"
-
-local opts = { noremap = true, silent = true }
-local map = vim.keymap.set
 
 -- copy selection into clipboard
 map('v', '<leader>y', ':w !tty-copy<CR>', opts)
