@@ -112,3 +112,19 @@ map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 -- Close/restore buffer
 map('n', '<A-w>', '<Cmd>BufferClose<CR>', opts)
 map('n', '<A-s-w>', '<Cmd>BufferRestore<CR>', opts)
+
+-- Resize splits using Shift + Arrow keys
+map('n', '<S-Up>', ':resize +2<CR>', opts)
+map('n', '<S-Down>', ':resize -2<CR>', opts)
+map('n', '<S-Left>', ':vertical resize -2<CR>', opts)
+map('n', '<S-Right>', ':vertical resize +2<CR>', opts)
+
+-- Spell check
+vim.api.nvim_create_user_command("VI", function()
+    if vim.wo.spell then
+        vim.wo.spell = false
+    else
+        -- 'silent!' suppresses all warning popups and press-enter prompts from the spell engine
+        vim.cmd("silent! setlocal spell spelllang=en,vi")
+    end
+end, { desc = "Toggle English/Vietnamese spell check silently" })

@@ -1,6 +1,14 @@
 set -x EDITOR vim
 set -gx TERM screen-256color-bce # kmscon need this else it gonna show weird color code
 
+# IME is fcitx5
+#XMODIFIERS=@im=fcitx
+#GTK_IM_MODULE=fcitx
+#QT_IM_MODULE=fcitx
+
+# Gemini authen for dataannotation
+set -gx GEMINI_API_KEY "sk-plwkr01-WGA7VVMJX6VGFPEFQT3639RZP4W9JAPCDFFG7HME6EVMMCYM"
+set -gx GOOGLE_GEMINI_BASE_URL "https://app.dataannotation.tech/api/llm_proxy/gemini"
 
 # set -x LESS "-N" # Cause man page to be scrambled
 # Scripts and stuff
@@ -31,16 +39,20 @@ function greet
     # set_color normal
 
     # Disk Usage (root filesystem)
-    echo -e -n (set_color yellow)"Store:\t"(set_color cyan)(df -h / | awk 'NR==2 {print $3 " / " $2 " (" $5 " used)"}')"\t"
+    echo -e -n (set_color yellow)"Store (/):\t"(set_color cyan)(df -h / | awk 'NR==2 {print $3 " / " $2 " (" $5 " used)"}')"\n"
+    echo -e -n (set_color yellow)"Store (/home):\t"(set_color cyan)(df -h /home | awk 'NR==2 {print $3 " / " $2 " (" $5 " used)"}')"\n"
+    echo -e -n (set_color yellow)"Store (win10):\t"(set_color cyan)(df -h /mnt/win10 | awk 'NR==2 {print $3 " / " $2 " (" $5 " used)"}')"\n"
     set_color normal
     # Optional: GPU Usage (if you have an NVIDIA GPU)
-    if type -q nvidia-smi
-        echo -e -n (set_color yellow)"GPU:\t"(set_color cyan)
-        nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits | \
-            awk -F ', ' '{print $1"% ("$2" MiB / "$3" MiB)"}'
-        set_color normal
-    end
+    # if type -q nvidia-smi
+    #    echo -e -n (set_color yellow)"GPU:\t"(set_color cyan)
+    #    nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits | \
+    #        awk -F ', ' '{print $1"% ("$2" MiB / "$3" MiB)"}'
+    # set_color normal
+    # end
     echo "-------------------------------------------------------"
-    echo "|       Terminal session on Reinir's laptop           |"
+    echo "|     Terminal session on Reinir's 3rd laptop         |"
+    echo "-------------------------------------------------------"
+    sed '/---/Q' ~/notes.txt 
     echo "-------------------------------------------------------"
 end

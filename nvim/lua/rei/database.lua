@@ -1,9 +1,18 @@
 local config_dir = vim.fn.stdpath("config")
 local command = config_dir .. '/database/connect.sh'
 local repl = config_dir .. '/database/REPL.sh'
+local opts = { noremap = true, silent = true }
 -- call db, dump result into RAM, open result in another buffer, nowrap. Look nice as hell
--- depend on cmd installed in local machine
-vim.keymap.set('v', '<leader>db', ':w !' .. command .. '| csvlook > /tmp/db.txt 2>&1<CR>:e /tmp/db.txt<CR>:setlocal nowrap<CR>', opts)
+-- depend on cmd installed in local machine. Need csvkit
+-- vim.keymap.set('v', '<leader>db', ':w !' .. command .. '| csvlook > /tmp/db.txt 2>&1<CR>:e /tmp/db.txt<CR>:setlocal nowrap<CR>', opts)
+
+-- Same as above, but open visidata instead. Need visidata
+vim.keymap.set('v', '<leader>db', ':w !' .. command .. ' > /tmp/db.csv 2>&1<CR>:term vd /tmp/db.csv<CR>:setlocal nowrap<CR>', opts)
+
+vim.api.nvim_create_user_command("CONN", function()
+    -- Open in a new tab
+    vim.cmd.tabedit('~/.config/nvim/database/connect.sh')
+end, {})
 
 vim.api.nvim_create_user_command("Conns", function()
     local dir = config_dir .. "/database/connections"

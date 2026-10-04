@@ -64,4 +64,4 @@ require("rei.buffer")
 require("rei.editor")
 require("rei.debugger")
 require("rei.database")
-
+require("rei.ime")
